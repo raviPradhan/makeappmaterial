@@ -100,7 +100,7 @@ public class DetailFragment extends Fragment implements
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
 //        mStatusBarColorDrawable = new ColorDrawable(0);
-        collapsingToolbarLayout = (CollapsingToolbarLayout) mRootView.findViewById(R.id.collapsing_toolbar);
+        collapsingToolbarLayout = (CollapsingToolbarLayout) mRootView.findViewById(R.id.ct_detail_collapsingToolbar);
         Toolbar toolbar = (Toolbar) mRootView.findViewById(R.id.toolbar);
         activity.setSupportActionBar(toolbar);
         View mCustomView = inflater.inflate(R.layout.toolbar, null);
