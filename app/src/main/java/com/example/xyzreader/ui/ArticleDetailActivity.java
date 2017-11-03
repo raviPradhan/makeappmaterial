@@ -8,12 +8,17 @@ import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
@@ -61,9 +66,6 @@ public class ArticleDetailActivity extends AppCompatActivity implements LoaderMa
             @Override
             public void onPageScrollStateChanged(int state) {
                 super.onPageScrollStateChanged(state);
-                /*mUpButton.animate()
-                        .alpha((state == ViewPager.SCROLL_STATE_IDLE) ? 1f : 0f)
-                        .setDuration(300);*/
             }
 
             @Override
@@ -76,33 +78,39 @@ public class ArticleDetailActivity extends AppCompatActivity implements LoaderMa
             }
         });
 
-        /*mUpButtonContainer = findViewById(R.id.action_up);
-
-        mUpButton = findViewById(R.id.action_up);
-        mUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onSupportNavigateUp();
-            }
-        });*/
-
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mUpButtonContainer.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
-                @Override
-                public WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
-                    view.onApplyWindowInsets(windowInsets);
-                    mTopInset = windowInsets.getSystemWindowInsetTop();
-                    mUpButtonContainer.setTranslationY(mTopInset);
-                    updateUpButtonPosition();
-                    return windowInsets;
-                }
-            });
-        }*/
-
         if (savedInstanceState == null) {
             if (getIntent() != null && getIntent().getData() != null) {
                 mStartId = ItemsContract.Items.getItemId(getIntent().getData());
                 mSelectedItemId = mStartId;
+            }
+        }
+
+        mPager.setPageTransformer(false, new ParallaxPageTransformer());
+    }
+
+    private class ParallaxPageTransformer implements ViewPager.PageTransformer {
+
+        public void transformPage(View view, float position) {
+
+            int pageWidth = view.getWidth();
+            ImageView imageView = (ImageView) view.findViewById(R.id.iv_detail_mainImage);
+            TextView title = (TextView) view.findViewById(R.id.tv_detail_articleTitle);
+            TextView subHead = (TextView) view.findViewById(R.id.tv_detail_articleSub);
+            TextView body = (TextView) view.findViewById(R.id.tv_detail_articleBody);
+            FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab_detail_share);
+
+            if (position < -1) { // [-Infinity,-1)
+                // This page is way off-screen to the left.
+                view.setAlpha(1);
+
+            } else if (position <= 1) { // [-1,1]
+                Toast.makeText(ArticleDetailActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+                imageView.setTranslationX(-position * (pageWidth / 2)); //Half the normal speed
+                subHead.setAlpha(.7F);
+
+            } else { // (1,+Infinity]
+                // This page is way off-screen to the right.
+                view.setAlpha(1);
             }
         }
     }
