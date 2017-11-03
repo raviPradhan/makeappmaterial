@@ -8,7 +8,6 @@ import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +17,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
@@ -32,7 +30,7 @@ public class ArticleDetailActivity extends AppCompatActivity implements LoaderMa
     private Cursor mCursor;
     private long mStartId;
 
-    private long mSelectedItemId;
+//    private long mSelectedItemId;
     /*private int mSelectedItemUpButtonFloor = Integer.MAX_VALUE;
     private int mTopInset;*/
 
@@ -73,7 +71,7 @@ public class ArticleDetailActivity extends AppCompatActivity implements LoaderMa
                 if (mCursor != null) {
                     mCursor.moveToPosition(position);
                 }
-                mSelectedItemId = mCursor.getLong(ArticleLoader.Query._ID);
+//                mSelectedItemId = mCursor.getLong(ArticleLoader.Query._ID);
 //                updateUpButtonPosition();
             }
         });
@@ -81,7 +79,7 @@ public class ArticleDetailActivity extends AppCompatActivity implements LoaderMa
         if (savedInstanceState == null) {
             if (getIntent() != null && getIntent().getData() != null) {
                 mStartId = ItemsContract.Items.getItemId(getIntent().getData());
-                mSelectedItemId = mStartId;
+//                mSelectedItemId = mStartId;
             }
         }
 
@@ -94,19 +92,18 @@ public class ArticleDetailActivity extends AppCompatActivity implements LoaderMa
 
             int pageWidth = view.getWidth();
             ImageView imageView = (ImageView) view.findViewById(R.id.iv_detail_mainImage);
-            TextView title = (TextView) view.findViewById(R.id.tv_detail_articleTitle);
+//            TextView title = (TextView) view.findViewById(R.id.tv_detail_articleTitle);
             TextView subHead = (TextView) view.findViewById(R.id.tv_detail_articleSub);
-            TextView body = (TextView) view.findViewById(R.id.tv_detail_articleBody);
-            FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab_detail_share);
+//            TextView body = (TextView) view.findViewById(R.id.tv_detail_articleBody);
+//            FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab_detail_share);
 
             if (position < -1) { // [-Infinity,-1)
                 // This page is way off-screen to the left.
                 view.setAlpha(1);
 
             } else if (position <= 1) { // [-1,1]
-                Toast.makeText(ArticleDetailActivity.this, "" + position, Toast.LENGTH_SHORT).show();
                 imageView.setTranslationX(-position * (pageWidth / 2)); //Half the normal speed
-                subHead.setAlpha(.7F);
+                subHead.setAlpha(.5F);
 
             } else { // (1,+Infinity]
                 // This page is way off-screen to the right.
@@ -160,7 +157,7 @@ public class ArticleDetailActivity extends AppCompatActivity implements LoaderMa
     }*/
 
     private class MyPagerAdapter extends FragmentStatePagerAdapter {
-        public MyPagerAdapter(FragmentManager fm) {
+        MyPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 

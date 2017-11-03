@@ -18,14 +18,13 @@
 <resources>
     <color name="photo_placeholder">#ccc</color>
 
-    <color name="color_primary">#ff7224</color>
-    <color name="color_primary_dark">#c54200</color>
+    <color name="color_primary">#4CAF50</color>
+    <color name="color_primary_dark">#388E3C</color>
     <color name="color_accent">#607D8B</color>
-    <color name="color_secondary">#FF5722</color>
     <color name="color_text_primary">#212121</color>
     <color name="color_text_secondary">#757575</color>
     <color name="divider_color">#BDBDBD</color>
     <color name="window_background">#f7fff0</color>
-    <color name="color_primary_light">#ffa354</color>
-    <color name="transparent_light">#33ffa354</color>
+    <color name="color_primary_light">#C8E6C9</color>
+    <color name="transparent_light">#33C8E6C9</color>
 </resources>

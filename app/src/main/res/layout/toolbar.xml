@@ -5,7 +5,7 @@
     android:orientation="horizontal">
 
     <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/iv_toolbar_backArrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"

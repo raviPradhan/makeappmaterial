@@ -104,7 +104,7 @@ public class DetailFragment extends Fragment implements
         Toolbar toolbar = (Toolbar) mRootView.findViewById(R.id.toolbar);
         activity.setSupportActionBar(toolbar);
         View mCustomView = inflater.inflate(R.layout.toolbar, null);
-        mCustomView.findViewById(R.id.imageView1).setOnClickListener(new View.OnClickListener() {
+        mCustomView.findViewById(R.id.iv_toolbar_backArrow).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -165,6 +165,7 @@ public class DetailFragment extends Fragment implements
             shareFab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    v.animate().rotation(360);
                     Intent sharingIntent = new Intent(Intent.ACTION_SEND);
                     sharingIntent.setType("text/plain");
                     sharingIntent.putExtra(Intent.EXTRA_SUBJECT, title);
